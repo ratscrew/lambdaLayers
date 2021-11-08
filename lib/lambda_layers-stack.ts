@@ -22,8 +22,8 @@ export class LambdaLayersStack extends cdk.Stack {
         lambda.Runtime.NODEJS_12_X,
         lambda.Runtime.NODEJS_14_X,
       ],
-      code: lambda.Code.fromAsset('../otherRepo/nodejs'),
-      description: 'test',
+      code: lambda.Code.fromAsset('./otherRepo/nodejs'),
+      description: 'test repo',
     });
 
     const lambdaFn = new lambda.Function(this, 'MyFunction', {
