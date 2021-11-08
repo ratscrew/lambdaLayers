@@ -8,6 +8,7 @@ export class MyPipelineStack extends cdk.Stack {
       super(scope, id, props);
   
       const pipeline = new pipelines.CodePipeline(this, 'Pipeline', {
+        selfMutation:true,
         synth: new pipelines.ShellStep('Synth', {
           // Use a connection created using the AWS console to authenticate to GitHub
           // Other sources are available.
