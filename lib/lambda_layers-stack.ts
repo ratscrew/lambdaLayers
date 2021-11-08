@@ -17,14 +17,14 @@ export class LambdaLayersStack extends cdk.Stack {
       description: 'test',
     });
 
-    const otherRpoLayer = new lambda.LayerVersion(this, 'other-repo-layer', {
-      compatibleRuntimes: [
-        lambda.Runtime.NODEJS_12_X,
-        lambda.Runtime.NODEJS_14_X,
-      ],
-      code: lambda.Code.fromAsset('./otherRepo/nodejs'),
-      description: 'test repo',
-    });
+    // const otherRpoLayer = new lambda.LayerVersion(this, 'other-repo-layer', {
+    //   compatibleRuntimes: [
+    //     lambda.Runtime.NODEJS_12_X,
+    //     lambda.Runtime.NODEJS_14_X,
+    //   ],
+    //   code: lambda.Code.fromAsset('./otherRepo/nodejs'),
+    //   description: 'test repo',
+    // });
 
     const lambdaFn = new lambda.Function(this, 'MyFunction', {
       runtime: lambda.Runtime.NODEJS_12_X,
