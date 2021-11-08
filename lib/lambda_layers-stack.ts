@@ -22,7 +22,7 @@ export class LambdaLayersStack extends cdk.Stack {
         lambda.Runtime.NODEJS_12_X,
         lambda.Runtime.NODEJS_14_X,
       ],
-      code: lambda.Code.fromAsset('../otherRepo/nodejs'),
+      code: lambda.Code.fromAsset('./otherRepo/nodejs'),
       description: 'test repo',
     });
 
