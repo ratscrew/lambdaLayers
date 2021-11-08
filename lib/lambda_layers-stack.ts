@@ -1,6 +1,8 @@
 import * as cdk from '@aws-cdk/core';
 import * as lambda from '@aws-cdk/aws-lambda';
-import * as path from 'path'
+import * as path from 'path';
+import { Rule, Schedule } from '@aws-cdk/aws-events';
+import { LambdaFunction } from '@aws-cdk/aws-events-targets';
 
 export class LambdaLayersStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -35,5 +37,16 @@ export class LambdaLayersStack extends cdk.Stack {
         otherRpoLayer
       ]
     });
+
+    const lambdaTarget = new LambdaFunction(lambdaFn,{
+      retryAttempts:2
+    })
+
+    new Rule(this, 'ScheduleRule', {
+      schedule: Schedule.cron({ }),
+      targets: [lambdaTarget],
+     });
+
+
   }
 }
