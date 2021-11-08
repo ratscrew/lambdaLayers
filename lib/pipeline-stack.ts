@@ -15,6 +15,11 @@ export class MyPipelineStack extends cdk.Stack {
           input: pipelines.CodePipelineSource.connection('ratscrew/lambdaLayers', 'master', {
             connectionArn: 'arn:aws:codestar-connections:eu-west-1:453380824957:connection/d20353d2-91a7-447a-905c-9c0c36de7dc6', // Created using the AWS console * });',
           }),
+          additionalInputs:{
+            otherRepo: pipelines.CodePipelineSource.connection('ratscrew/testLayer', 'main', {
+              connectionArn: 'arn:aws:codestar-connections:eu-west-1:453380824957:connection/d20353d2-91a7-447a-905c-9c0c36de7dc6', // Created using the AWS console * });',
+            })
+          },
           commands: [
             'npm ci',
             'npm run build',
