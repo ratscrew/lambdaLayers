@@ -1,3 +1,3 @@
 exports.test = function (){
-    return true
+    return "this is a great example of a lambda layer"
 }
