@@ -31,7 +31,8 @@ export class LambdaLayersStack extends cdk.Stack {
       handler: 'index.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../lambda')),
       layers:[
-        testLayer
+        testLayer,
+        otherRpoLayer
       ]
     });
   }
