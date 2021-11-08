@@ -43,7 +43,7 @@ export class MyPipelineStack extends cdk.Stack {
     constructor(scope: cdk.Construct, id: string, props?: cdk.StageProps) {
       super(scope, id, props);
   
-      const lambdaLayersStack = new LambdaLayersStack(this, 'lambdaLayers',{
+      const lambdaLayersStack = new LambdaLayersStack(this, 'lambdaLayersStack',{
           env:  { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
       });
 
