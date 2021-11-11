@@ -25,10 +25,30 @@ export class LambdaLayersStack extends cdk.Stack {
         lambda.Runtime.NODEJS_14_X,
       ],
       code: lambda.Code.fromAsset('./otherRepo/nodejs'),
-      description: 'test repo',
+      description: 'test otherRepo',
+    });
+
+    const npmTestLayer = new lambda.LayerVersion(this, 'npm-test-layer', {
+      compatibleRuntimes: [
+        lambda.Runtime.NODEJS_12_X,
+        lambda.Runtime.NODEJS_14_X,
+      ],
+      code: lambda.Code.fromAsset('./lambda_layer'),
+      description: 'npm test repo',
     });
 
     const lambdaFn = new lambda.Function(this, 'MyFunction', {
+      runtime: lambda.Runtime.NODEJS_12_X,
+      handler: 'index.handler',
+      code: lambda.Code.fromAsset(path.join(__dirname, '../lambda')),
+      layers:[
+        testLayer,
+        otherRpoLayer,
+        npmTestLayer
+      ]
+    });
+
+    const lambda2Fn = new lambda.Function(this, 'MyFunction2', {
       runtime: lambda.Runtime.NODEJS_12_X,
       handler: 'index.handler',
       code: lambda.Code.fromAsset(path.join(__dirname, '../lambda')),
@@ -38,13 +58,24 @@ export class LambdaLayersStack extends cdk.Stack {
       ]
     });
 
+
+
     const lambdaTarget = new LambdaFunction(lambdaFn,{
       retryAttempts:2
     })
 
-    new Rule(this, 'ScheduleRule', {
+    const lambdaTarget2 = new LambdaFunction(lambda2Fn,{
+      retryAttempts:3
+    })
+
+    new Rule(this, 'ScheduleRule1', {
       schedule: Schedule.cron({ }),
       targets: [lambdaTarget],
+     });
+
+     new Rule(this, 'ScheduleRule2', {
+      schedule: Schedule.cron({ }),
+      targets: [lambdaTarget2],
      });
 
 
