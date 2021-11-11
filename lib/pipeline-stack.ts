@@ -25,7 +25,7 @@ export class MyPipelineStack extends cdk.Stack {
           commands: [
             'cd lambda_layer',
             'npm i',
-            'cd..',
+            'cd ..',
             'npm ci',
             'npm run build',
             'npx cdk synth',
