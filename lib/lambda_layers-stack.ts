@@ -48,15 +48,15 @@ export class LambdaLayersStack extends cdk.Stack {
       ]
     });
 
-    const lambda2Fn = new lambda.Function(this, 'MyFunction2', {
-      runtime: lambda.Runtime.NODEJS_12_X,
-      handler: 'index.handler',
-      code: lambda.Code.fromAsset(path.join(__dirname, '../lambda')),
-      layers:[
-        testLayer,
-        otherRpoLayer
-      ]
-    });
+    // const lambda2Fn = new lambda.Function(this, 'MyFunction2', {
+    //   runtime: lambda.Runtime.NODEJS_12_X,
+    //   handler: 'index.handler',
+    //   code: lambda.Code.fromAsset(path.join(__dirname, '../lambda')),
+    //   layers:[
+    //     testLayer,
+    //     //otherRpoLayer
+    //   ]
+    // });
 
 
 
@@ -64,19 +64,19 @@ export class LambdaLayersStack extends cdk.Stack {
       retryAttempts:2
     })
 
-    const lambdaTarget2 = new LambdaFunction(lambda2Fn,{
-      retryAttempts:3
-    })
+    // const lambdaTarget2 = new LambdaFunction(lambda2Fn,{
+    //   retryAttempts:3
+    // })
 
     new Rule(this, 'ScheduleRule1', {
       schedule: Schedule.cron({ }),
       targets: [lambdaTarget],
      });
 
-     new Rule(this, 'ScheduleRule2', {
-      schedule: Schedule.cron({ }),
-      targets: [lambdaTarget2],
-     });
+    //  new Rule(this, 'ScheduleRule2', {
+    //   schedule: Schedule.cron({ }),
+    //   targets: [lambdaTarget2],
+    //  });
 
 
   }
